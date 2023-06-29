@@ -55,6 +55,7 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   }
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 -- NOTE: Here is where you install your plugins.
@@ -97,7 +98,7 @@ require('lazy').setup({
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
+     'saadparwaiz1/cmp_luasnip',
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
@@ -134,6 +135,25 @@ require('lazy').setup({
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
+      require('onedark').setup{
+        transparent = true,
+        colors = {
+          yellow = "#E6DB74",
+          orange = "#FD971F",
+          red = "#F92672",
+          magenta = "#FD5FF0",
+          blue = "#66D9EF",
+          green = "#A6E22E",
+          cyan = "#A1EFE4",
+          violet = "#AE81FF",
+        },
+        highlights = {
+          ["keyword"] = { fg = "$blue" },
+          ["string"] = { fg = "$orange", bg = "#00ff00", fmt = "bold" },
+          ["function"] = { fg = "#0000ff", sp = "$cyan", fmt = "underline,italic" },
+          ["function.builtin"] = { fg = "#0059ff" },
+        },
+      }
       vim.cmd.colorscheme 'onedark'
     end,
   },
@@ -144,10 +164,11 @@ require('lazy').setup({
     -- See `:help lualine.txt`
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'onedark',
         component_separators = '|',
         section_separators = '',
+        transparent = true,
       },
     },
   },
@@ -160,6 +181,8 @@ require('lazy').setup({
     opts = {
       char = '┊',
       show_trailing_blankline_indent = false,
+      space_char_blankline = " ",
+
     },
   },
 
@@ -246,6 +269,15 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+-- Set relative numbers
+vim.o.relativenumber = true
+
+-- Indentation
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- [[ Basic Keymaps ]]
 
